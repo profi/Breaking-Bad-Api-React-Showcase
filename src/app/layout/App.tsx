@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import axios from 'axios'
 import { Container, Header, List } from 'semantic-ui-react';
 import  { BreakingBadCharacter }  from '../models/breakingbadcharacter';
 import NavBar from './NavBar';
 import BreakingBadDashboard from '../../features/breakingBad/BreakingBadDashBoard';
-import {v4 as uuid} from 'uuid';
+import agent from '../api/agent';
+import LoadingComponemt from './LoadingComponents';
 
 
 
@@ -13,12 +13,20 @@ function App() {
   const [breakingBadCharacters, setBreakingBadCharacters] = useState<BreakingBadCharacter[]>([])
   const [selectedBreakingBadCharacter, setSelectedBreakingBadCharacter] = useState<BreakingBadCharacter | undefined>(undefined);
   const [editMode ,setEditMode] = useState(false);
+  const [loading,setLoading] = useState(true);
 
   useEffect(() => {
 
-    axios.get<BreakingBadCharacter[]>('https://localhost:7210/api/BreakingBad/GetAllCharacters').then(response => {
+    agent.BreakingBadCharacters.list().then(response => {
+     
+      let breakingBadCharactersLocale : BreakingBadCharacter[] = [];
+      response.forEach(breakingBadCharacter => {
+        breakingBadCharacter.birthday = new Date(breakingBadCharacter.birthday).toLocaleDateString();
+        breakingBadCharactersLocale.push(breakingBadCharacter);
+      })
+      setBreakingBadCharacters(breakingBadCharactersLocale);
       console.log(response);
-      setBreakingBadCharacters(response.data);
+      setLoading(false);
     })
 
   }, []);
@@ -49,9 +57,10 @@ function App() {
     setSelectedBreakingBadCharacter(breakingBadCharacter);
   }
   function handleDeleteActivity(id : number){
-    setBreakingBadCharacters({...breakingBadCharacters.filter(x=>x.char_id !== id)});
 
+    setBreakingBadCharacters({...breakingBadCharacters.filter(x=>x.char_id !== id)});
   }
+  if (loading) return <LoadingComponemt content='Loading app'/>
   
   return (
     <Fragment>

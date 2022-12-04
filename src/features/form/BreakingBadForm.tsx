@@ -1,6 +1,6 @@
 
 import React, { ChangeEvent, useState } from "react";
-import { Button, Form, FormButton, Segment  } from "semantic-ui-react";
+import {  Form, Segment  } from "semantic-ui-react";
 import { BreakingBadCharacter } from "../../app/models/breakingbadcharacter";
 
 interface Props {
@@ -45,7 +45,7 @@ export default function BreakingBadForm({breakingBadCharacter : selectedBreaking
             <Form onSubmit={handleSubmit} autoComplete = 'off'>
                 <Form.Input  placeholder  = 'Name' value = {breakingBadCharacter.name} onChange={handleInputChange}/>
                 {/* <Form.Input  placeholder  = 'Ocupation'  value = {breakingBadCharacter.occupation} name = 'occupation'  onChange={handleInputChange}/> */}
-                <Form.Input  placeholder  = 'Birthday' value = {breakingBadCharacter.birthday} name = 'birthday'  onChange={handleInputChange}/>
+                <Form.Input  type = 'date' placeholder  = 'Birthday' value = {breakingBadCharacter.birthday} name = 'birthday'  onChange={handleInputChange}/>
                 <Form.Input  placeholder  = 'Nick Name' value = {breakingBadCharacter.nickname} name = 'nickname'  onChange={handleInputChange}/>
                 <Form.Input  placeholder  = 'Apearance' value = {breakingBadCharacter.appearance} name = 'appearance'  onChange={handleInputChange}/>
                 <Form.Input  placeholder  = 'Category' value = {breakingBadCharacter.category} name = 'category'  onChange={handleInputChange}/>
