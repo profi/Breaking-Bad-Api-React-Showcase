@@ -15,15 +15,20 @@ interface Props{
     openForm :  (id: number) => void;
     closeForm : () => void;
     createOrEdit : (breakingBadCharacter : BreakingBadCharacter) => void;
+    deleteBreakingBadCharacter : (id : number) => void;
 }
 
 export default function BreakingBadDashBoard({breakingBadCharacterList, selectedBreakingBadCharacter, 
-    selectBreakingBadCharacter , cancelBreakingBadCharacter, editMode, closeForm, openForm, createOrEdit  }: Props)
+    selectBreakingBadCharacter , cancelBreakingBadCharacter, editMode, closeForm, openForm, createOrEdit, deleteBreakingBadCharacter  }: Props)
 {
     return (
             <Grid>
                 <Grid.Column width = '10'>
-                    <BreakingBadCharactersList breakingBadCharacters={breakingBadCharacterList} selectBreakingBadCharacter = {selectBreakingBadCharacter}/>
+                    <BreakingBadCharactersList 
+                    breakingBadCharacters={breakingBadCharacterList} 
+                    selectBreakingBadCharacter = {selectBreakingBadCharacter}
+                    deleteBreakingBadCharacter = {deleteBreakingBadCharacter}
+                    />
                 </Grid.Column>
                 <Grid.Column width = '6'>                   
                     {selectedBreakingBadCharacter &&  !editMode &&

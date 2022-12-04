@@ -4,6 +4,7 @@ import { Container, Header, List } from 'semantic-ui-react';
 import  { BreakingBadCharacter }  from '../models/breakingbadcharacter';
 import NavBar from './NavBar';
 import BreakingBadDashboard from '../../features/breakingBad/BreakingBadDashBoard';
+import {v4 as uuid} from 'uuid';
 
 
 
@@ -43,9 +44,13 @@ function App() {
   function handleCreateOrEditBreakingBadCharacter(breakingBadCharacter : BreakingBadCharacter){
     breakingBadCharacter.char_id 
     ? setBreakingBadCharacters([...breakingBadCharacters.filter(x=>x.char_id !== breakingBadCharacter.char_id),breakingBadCharacter])
-    : setBreakingBadCharacters([...breakingBadCharacters, breakingBadCharacter]);
+    : setBreakingBadCharacters([...breakingBadCharacters, {...breakingBadCharacter, char_id: Math.random() * (100 - 50) + 50}]);
     setEditMode(false);
     setSelectedBreakingBadCharacter(breakingBadCharacter);
+  }
+  function handleDeleteActivity(id : number){
+    setBreakingBadCharacters({...breakingBadCharacters.filter(x=>x.char_id !== id)});
+
   }
   
   return (
@@ -62,6 +67,7 @@ function App() {
         openForm ={handleOpenForm}
         closeForm = {handleFormClose}
         createOrEdit = {handleCreateOrEditBreakingBadCharacter}
+        deleteBreakingBadCharacter = {handleDeleteActivity}
         />
         </Container>
         

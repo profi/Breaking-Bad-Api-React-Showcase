@@ -6,21 +6,21 @@ import { BreakingBadCharacter } from "../../app/models/breakingbadcharacter";
 interface Props {
     breakingBadCharacter : BreakingBadCharacter | undefined;
     closeForm : () => void;
-    createOrEdit: (breakingBadCharacter : BreakingBadCharacter | undefined) => void;
+    createOrEdit: (breakingBadCharacter : BreakingBadCharacter) => void;
 }
 
 export default function BreakingBadForm({breakingBadCharacter : selectedBreakingBadCharacter, closeForm, createOrEdit} : Props) {
 
     const initialState = selectedBreakingBadCharacter ?? {
-        char_id: '',
+        char_id: 0,
         name : '',
         nickname : '',
-        appearance : '',
-        occupation : '',
+        appearance : [],
+        occupation : [],
         birthday : '',
         category : '',
         status : '',
-        better_call_saul_appearance : '',
+        better_call_saul_appearance : [],
         img : '',
         portrayed : '',
 

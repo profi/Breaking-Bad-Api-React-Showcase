@@ -6,9 +6,10 @@ import { BreakingBadCharacter } from "../../app/models/breakingbadcharacter";
 interface Props{
     breakingBadCharacters : BreakingBadCharacter[]
     selectBreakingBadCharacter : (id: number) => void;
+    deleteBreakingBadCharacter : (id : number) => void;
 }
 
-export default function  BreakingBadCharactersList({breakingBadCharacters, selectBreakingBadCharacter} : Props){
+export default function  BreakingBadCharactersList({breakingBadCharacters, selectBreakingBadCharacter, deleteBreakingBadCharacter} : Props){
     return(
         <Segment>
             <Item.Group divided>
@@ -25,6 +26,7 @@ export default function  BreakingBadCharactersList({breakingBadCharacters, selec
                             </Item.Description>
                             <Item.Extra>
                                 <Button onClick={() => selectBreakingBadCharacter(breakingBadCharacter.char_id)} floated = 'right' content = 'View' color = 'blue' />
+                                <Button onClick={() => deleteBreakingBadCharacter(breakingBadCharacter.char_id)} floated = 'right' content = 'Delete' color = 'red' />
                                 <Label basic content = {breakingBadCharacter.category}></Label>
                             </Item.Extra>
                         </Item.Content>
